@@ -49,9 +49,20 @@ form.addEventListener("submit", (e) => {
   const anio = document.getElementById("anio").value;
   const genero = document.getElementById("genero").value;
 
-  const nuevaPeli = new Pelicula(peliculas.length + 1, titulo, anio, genero);
-  peliculas.push(nuevaPeli);
+  // Uso de let para mensaje
+  let mensaje = "Pelicula agregada con exito";
+  if (!titulo || !anio || !genero) {
+    mensaje = "Todos los campos son obligatorios";
+  }
 
-  mostrarPeliculas();
-  form.reset(); // limpiar formulario
+  // Uso de objeto para agregar pelicula
+  if (titulo && anio && genero) {
+    const nuevaPeli = new Pelicula(peliculas.length + 1, titulo, anio, genero);
+    peliculas.push(nuevaPeli);
+    mostrarPeliculas();
+    form.reset(); // limpiar formulario
+  }
+
+  // Mensaje
+  alert(mensaje);
 });
