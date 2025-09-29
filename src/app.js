@@ -33,10 +33,30 @@ function mostrarPeliculas() {
 
   peliculas.forEach((peli) => {
     const li = document.createElement("li");
-    li.textContent = peli.getDescripcion();
+    
+    li.classList.add("tarjeta");
+
+    const span = document.createElement("span");
+    span.textContent = peli.getDescripcion();
+
+    // Botón eliminar
+    const btnEliminar = document.createElement("button");
+    btnEliminar.textContent = "Eliminar";
+    btnEliminar.classList.add("btn-eliminar");
+    btnEliminar.addEventListener("click", () => {
+      if (confirm(`¿Querés borrar "${peli.titulo}"?`)) {
+        peliculas = peliculas.filter(p => p.id !== peli.id);
+        guardarPeliculas();
+        mostrarPeliculas();
+      }
+    });
+
+    // Agregar elementos al li
+    li.appendChild(span);
+    li.appendChild(btnEliminar);
+
     lista.appendChild(li);
   });
-
 }
 
 // Guardar array en localStorage
@@ -51,9 +71,9 @@ form.addEventListener("submit", (e) => {
   const anio = document.getElementById("anio").value;
   const genero = document.getElementById("genero").value;
 
-  let mensaje = "Película agregada con éxito ✅";
+  let mensaje = "Pelicula agregada con exito";
   if (!titulo || !anio || !genero) {
-    mensaje = "⚠️ Todos los campos son obligatorios";
+    mensaje = "Todos los campos son obligatorios";
   }
 
   if (titulo && anio && genero) {

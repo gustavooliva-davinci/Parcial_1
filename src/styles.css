@@ -62,18 +62,18 @@ form input:focus {
   box-shadow: 0 0 5px rgba(99, 102, 241, 0.3);
 }
 
-form button {
-  background: #6366f1;
+.btn {
+  background: #3498db;
   color: white;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
 }
 
-form button:hover {
-  background: #4f46e5;
-  transform: translateY(-2px);
+.btn:hover {
+  background: #2980b9;
 }
 
 #lista_peliculas {
@@ -96,4 +96,36 @@ form button:hover {
 #lista_peliculas li:hover {
   transform: scale(1.05);
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* Tarjeta de película */
+#lista_peliculas li.tarjeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9fafb;
+  padding: 12px 15px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  margin-bottom: 10px;
+}
+
+#lista_peliculas li.tarjeta:hover {
+  transform: scale(1.02);
+}
+
+/* Botón eliminar dentro de tarjeta */
+.btn-eliminar {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-eliminar:hover {
+  background: #c0392b;
 }
