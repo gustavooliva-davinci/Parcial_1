@@ -60,9 +60,23 @@ form.addEventListener("submit", (e) => {
     const nuevaPeli = new Pelicula(peliculas.length + 1, titulo, anio, genero);
     peliculas.push(nuevaPeli);
     mostrarPeliculas();
+    guardarPeliculas(); // guardo las peliculas en localstorage
     form.reset(); // limpiar formulario
   }
 
   // Mensaje
   alert(mensaje);
 });
+
+// Guardar array completo de pelicula (localStorage)
+function guardarPeliculas(){
+    localStorage.setItem("peliculas", JSON.stringify(peliculas));
+}
+
+// Validar info
+const peliculasGuardadas = localStorage.getItem("peliculas");
+if (peliculasGuardadas) {
+    peliculas = JSON.parse(peliculasGuardadas).map(
+        (p) => new Pelicula(p.id, p.titulo, p.anio, p.genero)
+    );
+}
