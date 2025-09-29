@@ -1,17 +1,17 @@
 // Clase Pelicula
 class Pelicula {
 
-  constructor(id, titulo, año, genero) {
+  constructor(id, titulo, anio, genero) {
     this.id = id;
     this.titulo = titulo;
-    this.año = año;
+    this.anio = anio;
     this.genero = genero;
   }
 
   getDescripcion() {
-    return `${this.titulo} (${this.año}) - Género: ${this.genero}`;
+    return `${this.titulo} (${this.anio}) - Género: ${this.genero}`;
   }
-  
+
 }
 
 // Array de películas
@@ -26,10 +26,32 @@ const peliculas = [
 // Mostrar en DOM
 const lista = document.getElementById("lista_peliculas");
 
-peliculas.forEach(peli => {
+function mostrarPeliculas() {
 
-  const li = document.createElement("li");
-  li.textContent = peli.getDescripcion();
-  lista.appendChild(li);
+  lista.innerHTML = ""; // limpiar lista
 
+  peliculas.forEach(peli => {
+    const li = document.createElement("li");
+    li.textContent = peli.getDescripcion();
+    lista.appendChild(li);
+  });
+}
+
+mostrarPeliculas();
+
+// Manejar formulario
+const form = document.getElementById("form_pelicula");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const titulo = document.getElementById("titulo").value;
+  const anio = document.getElementById("anio").value;
+  const genero = document.getElementById("genero").value;
+
+  const nuevaPeli = new Pelicula(peliculas.length + 1, titulo, anio, genero);
+  peliculas.push(nuevaPeli);
+
+  mostrarPeliculas();
+  form.reset(); // limpiar formulario
 });
