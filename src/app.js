@@ -14,8 +14,8 @@ class Pelicula {
 
 }
 
-// Array de películas
-const peliculas = [
+// Array de películas (cambio cons x let para poder cambiar)
+let peliculas = [
 
   new Pelicula(1, "The Batman", 2022, "Acción"),
   new Pelicula(2, "Avatar: El Camino del Agua", 2022, "Ciencia ficción"),
@@ -23,24 +23,26 @@ const peliculas = [
 
 ];
 
-// Mostrar en DOM
+// Referencias al DOM
 const lista = document.getElementById("lista_peliculas");
+const form = document.getElementById("form_pelicula");
 
+// Mostrar en DOM
 function mostrarPeliculas() {
-
   lista.innerHTML = ""; // limpiar lista
 
-  peliculas.forEach(peli => {
+  peliculas.forEach((peli) => {
     const li = document.createElement("li");
     li.textContent = peli.getDescripcion();
     lista.appendChild(li);
   });
+
 }
 
-mostrarPeliculas();
-
-// Manejar formulario
-const form = document.getElementById("form_pelicula");
+// Guardar array en localStorage
+function guardarPeliculas() {
+  localStorage.setItem("peliculas", JSON.stringify(peliculas));
+}
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -49,34 +51,30 @@ form.addEventListener("submit", (e) => {
   const anio = document.getElementById("anio").value;
   const genero = document.getElementById("genero").value;
 
-  // Uso de let para mensaje
-  let mensaje = "Pelicula agregada con exito";
+  let mensaje = "Película agregada con éxito ✅";
   if (!titulo || !anio || !genero) {
-    mensaje = "Todos los campos son obligatorios";
+    mensaje = "⚠️ Todos los campos son obligatorios";
   }
 
-  // Uso de objeto para agregar pelicula
   if (titulo && anio && genero) {
     const nuevaPeli = new Pelicula(peliculas.length + 1, titulo, anio, genero);
     peliculas.push(nuevaPeli);
+
+    guardarPeliculas();
     mostrarPeliculas();
-    guardarPeliculas(); // guardo las peliculas en localstorage
+
     form.reset(); // limpiar formulario
   }
 
-  // Mensaje
   alert(mensaje);
 });
 
-// Guardar array completo de pelicula (localStorage)
-function guardarPeliculas(){
-    localStorage.setItem("peliculas", JSON.stringify(peliculas));
-}
-
-// Validar info
+// Cargar desde localStorage si ya hay datos
 const peliculasGuardadas = localStorage.getItem("peliculas");
 if (peliculasGuardadas) {
-    peliculas = JSON.parse(peliculasGuardadas).map(
-        (p) => new Pelicula(p.id, p.titulo, p.anio, p.genero)
-    );
+  peliculas = JSON.parse(peliculasGuardadas).map(
+    (p) => new Pelicula(p.id, p.titulo, p.anio, p.genero)
+  );
 }
+
+mostrarPeliculas();
