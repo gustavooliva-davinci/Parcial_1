@@ -1,57 +1,99 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f9;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #dbeafe, #ede9fe);
+    color: #333;
+    line-height: 1.6;
 }
 
 .container {
   width: 90%;
   max-width: 650px;
-  margin: 40px auto;
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 50px auto;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
 }
 
 h1 {
+  margin-bottom: 25px;
+  color: #4338ca;
   text-align: center;
-  color: #333;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+
+form {
+  background: #f9fafb;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  max-width: 600px;
+  width: 100%;
+}
+
+form input,
+form button {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+}
+
+form input:focus {
+  border-color: #6366f1;
+  outline: none;
+  box-shadow: 0 0 5px rgba(99, 102, 241, 0.3);
+}
+
+form button {
+  background: #6366f1;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+form button:hover {
+  background: #4f46e5;
+  transform: translateY(-2px);
 }
 
 #lista_peliculas {
   list-style: none;
-  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  max-width: 800px;
+  width: 100%;
 }
 
 #lista_peliculas li {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 10px;
-  margin: 10px 0;
-  background-color: #fafafa;
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-form {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-input, button {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-button {
-  background-color: #007BFF;
-  color: white;
-  cursor: pointer;
-  border: none;
-}
-
-button:hover {
-  background-color: #0056b3;
+#lista_peliculas li:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.12);
 }
