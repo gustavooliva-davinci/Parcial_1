@@ -43,6 +43,7 @@ function mostrarPeliculas() {
     const btnEliminar = document.createElement("button");
     btnEliminar.textContent = "Eliminar";
     btnEliminar.classList.add("btn-eliminar");
+    
     btnEliminar.addEventListener("click", () => {
       if (confirm(`¿Querés borrar "${peli.titulo}"?`)) {
         peliculas = peliculas.filter(p => p.id !== peli.id);
@@ -89,7 +90,34 @@ form.addEventListener("submit", (e) => {
   alert(mensaje);
 });
 
-// Cargar desde localStorage si ya hay datos
+
+// Cargar desde JsonBlob
+const API_URL = "http://jsonblob.com/1422367093915049984";
+
+function cargarDesdeAPI() {
+  fetch(API_URL)
+    .then((res) => res.json())
+    .then((data) => {
+      const pelisExternas = data.map(
+        (p) => new Pelicula(p.id, p.titulo, p.anio, p.genero)
+      );
+
+      // Mezclar sin duplicar (usamos titulo + año como clave)
+      pelisExternas.forEach((peliExterna) => {
+        const yaExiste = peliculas.some(
+          (p) => p.titulo === peliExterna.titulo && p.anio === peliExterna.anio
+        );
+        if (!yaExiste) {
+          peliculas.push(peliExterna);
+        }
+      });
+
+      guardarPeliculas();
+      mostrarPeliculas();
+    })
+    .catch((err) => console.error("Error al cargar API externa: ", err));
+}
+
 const peliculasGuardadas = localStorage.getItem("peliculas");
 if (peliculasGuardadas) {
   peliculas = JSON.parse(peliculasGuardadas).map(
@@ -98,3 +126,4 @@ if (peliculasGuardadas) {
 }
 
 mostrarPeliculas();
+cargarDesdeAPI();
