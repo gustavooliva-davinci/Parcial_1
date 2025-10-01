@@ -158,3 +158,49 @@ form button:hover {
   from {opacity: 0; transform: translateY(20px);}
   to {opacity: 1; transform: translateY(0);}
 }
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 2.8rem;
+  color: #ffda79;
+  text-shadow: 3px 3px 14px rgba(0, 0, 0, 0.8);
+}
+
+.subtitulo {
+  font-size: 1.2rem;
+  color: #dcdcdc;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.intro {
+  max-width: 800px;
+  margin: 0 auto 25px;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  text-align: center;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.footer {
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px 16px 0 0;
+  font-size: 0.95rem;
+  color: #ccc;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.4);
+}
+
+.footer p {
+  margin: 6px 0;
+}
