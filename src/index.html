@@ -11,13 +11,18 @@
     <div class="container">
         <h1>Lista de Películas</h1>
 
-        <!-- Formulario para agregar nuevas películas -->
+        <!-- Formulario para agregar nuevas peliculas -->
         <form id="form_pelicula">
             <input type="text" id="titulo" placeholder="Titulo" required>
             <input type="number" id="anio" placeholder="Año" required>
             <input type="text" id="genero" placeholder="Genero" required>
             <button type="submit" class="btn">Agregar</button>
         </form>
+
+        <!-- Buscador -->
+        <div class="buscador">
+            <input type="text" id="busqueda" placeholder="Buscar película...">
+        </div>
 
         <ul id="lista_peliculas"></ul>
     </div>

@@ -28,22 +28,20 @@ const lista = document.getElementById("lista_peliculas");
 const form = document.getElementById("form_pelicula");
 
 // Mostrar en DOM
-function mostrarPeliculas() {
+function mostrarPeliculas(listaParaMostrar = peliculas) {
   lista.innerHTML = ""; // limpiar lista
 
-  peliculas.forEach((peli) => {
+  listaParaMostrar.forEach((peli) => {   // 👈 ahora usa el array que le pasamos
     const li = document.createElement("li");
-    
     li.classList.add("tarjeta");
-
+    
     const span = document.createElement("span");
     span.textContent = peli.getDescripcion();
 
-    // Botón eliminar
     const btnEliminar = document.createElement("button");
     btnEliminar.textContent = "Eliminar";
     btnEliminar.classList.add("btn-eliminar");
-    
+
     btnEliminar.addEventListener("click", () => {
       if (confirm(`¿Querés borrar "${peli.titulo}"?`)) {
         peliculas = peliculas.filter(p => p.id !== peli.id);
@@ -52,7 +50,6 @@ function mostrarPeliculas() {
       }
     });
 
-    // Agregar elementos al li
     li.appendChild(span);
     li.appendChild(btnEliminar);
 
@@ -118,12 +115,26 @@ function cargarDesdeAPI() {
     .catch((err) => console.error("Error al cargar API externa: ", err));
 }
 
+// Inicializar
 const peliculasGuardadas = localStorage.getItem("peliculas");
 if (peliculasGuardadas) {
   peliculas = JSON.parse(peliculasGuardadas).map(
     (p) => new Pelicula(p.id, p.titulo, p.anio, p.genero)
   );
 }
+
+// Busqueda
+const inputBusqueda = document.getElementById("busqueda");
+
+inputBusqueda.addEventListener("input", () => {
+  const termino = inputBusqueda.value.toLowerCase();
+
+  const filtradas = peliculas.filter((peli) =>
+    peli.titulo.toLowerCase().includes(termino)
+  );
+
+  mostrarPeliculas(filtradas); 
+});
 
 mostrarPeliculas();
 cargarDesdeAPI();
